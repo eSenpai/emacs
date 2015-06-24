@@ -16,27 +16,11 @@
 (defun my:ac-c-header-init ()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
+  (add-to-list 'achead:include-directories '"/usr/include/c++/4.9")
 )
 ; now let's call this function from c/c++ hooks
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
-
-; start flymake-google-cpplint-load
-; let's define a function for flymake initialization
-(defun my:flymake-google-init () 
-  (require 'flymake-google-cpplint)
-  (custom-set-variables
-   '(flymake-google-cpplint-command "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/cpplint"))
-  (flymake-google-cpplint-load)
-)
-(add-hook 'c-mode-hook 'my:flymake-google-init)
-(add-hook 'c++-mode-hook 'my:flymake-google-init)
-
-; start google-c-style with emacs
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 ; movement between tabs
 (global-set-key (kbd "C-x <up>") 'windmove-up)
@@ -60,5 +44,5 @@
  '(default ((t (:family "Terminus" :foundry "xos4" :slant normal :weight normal :height 90 :width normal)))))
 ; lines
 (global-linum-mode 1)
-
-; not mine
+; iedit
+(define-key global-map (kbd "C-c ;") 'iedit-mode)
